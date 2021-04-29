@@ -1,0 +1,5 @@
+version: '3'
+services:
+  zimbu-dev:
+    build: .
+    tty: true
