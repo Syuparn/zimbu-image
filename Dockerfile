@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:20.04 AS builder
 
 # NOTE: zimbu fails to compile when its directory is located in /
 #       because IO.fullPath(IO.getdir()) returns NIL in Config.zu
@@ -13,5 +13,12 @@ RUN apt update -y && \
 RUN git clone https://github.com/bsed/zimbuw32 .
 
 RUN make bootstrap
+
+# required to run zimbu bin
+FROM gcc:10
+
+WORKDIR /zimbu/zimbu
+
+COPY --from=builder /zimbu/zimbu .
 
 ENV PATH $PATH:/zimbu/zimbu
