@@ -3,3 +3,6 @@ services:
   zimbu-dev:
     build: .
     tty: true
+  zimbu-image:
+    image: ghcr.io/syuparn/zimbu:0.1.0
+    tty: true
